@@ -9,7 +9,7 @@ import contextlib
 
 import markdown
 
-from toc_generator import path_iter
+from ipynb_common import path_iter
 
 
 def main():

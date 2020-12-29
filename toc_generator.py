@@ -7,7 +7,7 @@ import json
 import itertools
 import shutil
 
-IGNORE_PATTERNS = ('.*',)
+from ipynb_common import path_iter, markdown_to_ipynb
 
 MAX_HEADING_LEVEL = 2
 
@@ -68,18 +68,6 @@ def toc_ipynb(source, heading_level, title, preamble):
     return markdown_to_ipynb(markdown_lines)
 
 
-def path_iter(base_dir, ignore_patterns=IGNORE_PATTERNS):
-    ignore = shutil.ignore_patterns(*ignore_patterns)
-    for (dirpath, dirs, fnames) in os.walk(base_dir):
-        ignored_dirs = set(ignore(dirpath, dirs))
-        ignored_files = set(ignore(dirpath, fnames))
-        dirs[:] = filter(lambda x: x not in ignored_dirs, dirs)
-        fnames[:] = filter(lambda x: x not in ignored_files, fnames)
-        for f in fnames:
-            if f.endswith('.ipynb'):
-                yield os.path.join(dirpath, f)
-
-
 def extract_headings(ipynb):
     cells = ipynb['cells']
     source = itertools.chain.from_iterable(cell['source'] for cell in cells if cell['cell_type'] == 'markdown')
@@ -104,31 +92,6 @@ def extract_headings(ipynb):
             else:
                 assert len(match_heading[0]) != 1, 'Multiple top-level headings are found.'
             yield (len(match_heading[0]), heading)
-
-
-def markdown_to_ipynb(markdown_lines):
-    cells = [{
-        'cell_type': 'markdown',
-        'metadata': {},
-        'source': markdown_lines
-    }]
-    metadata = {
-        'kernelspec': {
-            'display_name': 'Python 3',
-            'language': 'python',
-            'name': 'python3',
-        },
-        'language_info': {
-            'name': '',
-        },
-    }
-    ipynb = {
-        'cells': cells,
-        'metadata': metadata,
-        'nbformat': 4,
-        'nbformat_minor': 4
-    }
-    return ipynb
 
 
 if __name__ == '__main__':

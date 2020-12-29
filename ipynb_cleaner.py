@@ -5,22 +5,11 @@ import sys
 import json
 import argparse
 
-from toc_generator import path_iter
+from ipynb_common import path_iter, COMMON_METADATA
 
 if (sys.version_info.major, sys.version_info.minor) < (3, 8):
     print('[ERROR] This script requires Python >= 3.8.')
     sys.exit(1)
-
-COMMON_METADATA = {
-    'kernelspec': {
-        'display_name': 'Python 3',
-        'language': 'python',
-        'name': 'python3',
-    },
-    'language_info': {
-        'name': '',
-    },
-}
 
 PRESERVED_METADATA_KEYS = ('tags', 'nbsphinx')
 
