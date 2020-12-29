@@ -10,6 +10,7 @@ GITHUB_USERNAME = $(shell env PYTHONPATH=$(SPHINXDIR) python3 -c 'import conf; p
 GITHUB_REPONAME = $(shell env PYTHONPATH=$(SPHINXDIR) python3 -c 'import conf; print(conf.github_reponame)')
 GITHUB_BRANCH = $(shell env PYTHONPATH=$(SPHINXDIR) python3 -c 'import conf; print(conf.github_branch)')
 COLAB_DIR     = $(shell env PYTHONPATH=$(SPHINXDIR) python3 -c 'import conf; print(conf.colab_dir)')
+INDEX_NAME    = index_of_terms
 
 all:
 	@echo SOURCEDIR: $(SOURCEDIR)
@@ -24,12 +25,18 @@ all:
 	@echo GITHUB_BRANCH: $(GITHUB_BRANCH)
 	@echo COLAB_DIR: $(COLAB_DIR)
 
+index:
+	-rm -fv $(SOURCEDIR)/$(INDEX_NAME).ipynb
+	-mv -fv $(TOCNAME).ipynb $(TOCNAME).ipynb.stash
+	$(PYTHONCMD) index_generator.py -s $(SOURCEDIR) -d $(SOURCEDIR) -n $(INDEX_NAME)
+	-mv -fv $(TOCNAME).ipynb.stash $(TOCNAME).ipynb
+
 toc:
 	-rm -fv $(SOURCEDIR)/$(TOCNAME).ipynb
 	$(PYTHONCMD) toc_generator.py -s $(SOURCEDIR) -n $(TOCNAME) -t "$(PROJECT)" -p toc_preamble.txt
 	mv -v $(TOCNAME).ipynb $(SOURCEDIR)
 
-sphinx: toc
+sphinx: index toc
 	-rm -fvr $(SPHINXDIR)/src
 	$(PYTHONCMD) release.py -s $(SOURCEDIR) -x $(SPHINXDIR)/src
 	rm -fv $(SPHINXDIR)/src/$(TOCNAME).ipynb
@@ -46,4 +53,4 @@ clean:
 	-rm -fv $(TOCNAME).rst
 	-rm -fvr $(SPHINXDIR)/src
 
-.PHONY: toc sphinx deploy clean
+.PHONY: index toc sphinx deploy clean
