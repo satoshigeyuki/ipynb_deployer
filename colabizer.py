@@ -21,6 +21,12 @@ IGNORE_PATTERNS = ('.*', '*~', '__pycache__')
 
 DOWNLOAD_IGNORE_FILE = '.download_ignore'
 
+HEADER_NOTICE = """
+##================================================
+## このセルを最初に実行せよ---Run this cell first.
+##================================================
+""".lstrip()
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -107,9 +113,7 @@ def make_colab_header(target_dir, target_base, url_base, ref_imgs, ignore=None):
                           for fname in fnames if os.path.relpath(os.path.join(reldir, fname)) not in ref_imgs)
     if code_lines:
         code_lines[-1] = code_lines[-1].rstrip()
-        code_lines = ['##====================================================\n',
-                      '## このセルを最初に実行せよ---Run this cell initially.\n',
-                      '##====================================================\n'] + code_lines
+        code_lines = HEADER_NOTICE.splitlines(True) + code_lines
     return {'cell_type': 'code',
             'execution_count': None,
             'metadata': {},
