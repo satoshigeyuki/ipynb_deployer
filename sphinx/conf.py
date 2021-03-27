@@ -19,7 +19,8 @@
 
 project = 'Example of multi-version deployment'
 author = 'SATO Shigeyuki'
-copyright = f'2020, {author}'
+year = '2020'
+copyright = f'{year}, {author}'
 
 ## For multi-version deployment
 docname = 'example'
@@ -129,5 +130,5 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, f'{docname}.tex', project,
-     fr'\copyright 2020,~{author}', 'manual'),
+     fr'\copyright {year},~{author}', 'manual'),
 ]
