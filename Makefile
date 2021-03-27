@@ -37,13 +37,14 @@ toc:
 	mv -v $(TOCNAME).ipynb $(SOURCEDIR)
 
 sphinx: index toc
-	-rm -fvr $(SPHINXDIR)/src
+	cd $(SPHINXDIR); make SOURCEDIR=src clean
 	$(PYTHONCMD) release.py -s $(SOURCEDIR) -x $(SPHINXDIR)/src
 	rm -fv $(SPHINXDIR)/src/$(TOCNAME).ipynb
 	cp -pv $(TOCNAME).rst $(SPHINXDIR)/src
 	cd $(SPHINXDIR); make SOURCEDIR=src all
 
 deploy:
+	rm -fR $(REPO_BASE)/$(REPO_WEBDIR) $(REPO_BASE)/$(COLAB_DIR)
 	cd $(SPHINXDIR); make REPODIR=$(abspath $(REPO_BASE)/$(REPO_WEBDIR)) deploy
 	$(PYTHONCMD) release.py -s $(SOURCEDIR) -z $(REPO_BASE)/$(REPO_WEBDIR)/$(DOCNAME).zip
 	$(PYTHONCMD) release.py -s $(SOURCEDIR) -r $(REPO_BASE) -g $(GITHUB_USERNAME) $(GITHUB_REPONAME) $(GITHUB_BRANCH) $(COLAB_DIR)
