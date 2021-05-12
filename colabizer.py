@@ -90,7 +90,7 @@ def colabize_directory(source_dir, public_base, dest_base, url_base, ignore_patt
             source_path = os.path.join(dirpath, filename)
             with open(source_path, encoding='utf-8') as f:
                 ipynb = json.load(f)
-            ref_imgs = replace_img_links(ipynb['cells'], os.path.join(url_base, source_dir))
+            ref_imgs = replace_img_links(ipynb['cells'], os.path.join(url_base, dirpath))
             header = make_colab_header(os.path.join(public_dir, os.path.relpath(dirpath, source_dir)), public_base, url_base, ref_imgs, dl_ignore)
             if header['source']:
                 ipynb['cells'].insert(0, header)
