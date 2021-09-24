@@ -27,9 +27,9 @@ all:
 
 index:
 	-rm -fv $(SOURCEDIR)/$(INDEX_NAME).ipynb
-	-mv -fv $(TOCNAME).ipynb $(TOCNAME).ipynb.stash
+	-mv -fv $(SOURCEDIR)/$(TOCNAME).ipynb $(SOURCEDIR)/$(TOCNAME).ipynb.stash
 	$(PYTHONCMD) index_generator.py -s $(SOURCEDIR) -d $(SOURCEDIR) -n $(INDEX_NAME)
-	-mv -fv $(TOCNAME).ipynb.stash $(TOCNAME).ipynb
+	-mv -fv $(SOURCEDIR)/$(TOCNAME).ipynb.stash $(SOURCEDIR)/$(TOCNAME).ipynb
 
 toc:
 	-rm -fv $(SOURCEDIR)/$(TOCNAME).ipynb
