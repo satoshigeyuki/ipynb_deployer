@@ -1,15 +1,15 @@
-PYTHONCMD     = python3.8
+PYTHONCMD     = python3
 SOURCEDIR     = source
 REPO_BASE     = reponame
 REPO_WEBDIR   = docs
 SPHINXDIR     = sphinx
-TOCNAME       = $(shell env PYTHONPATH=$(SPHINXDIR) python3 -c 'import conf; print(conf.master_doc)')
-PROJECT       = $(shell env PYTHONPATH=$(SPHINXDIR) python3 -c 'import conf; print(conf.project)')
-DOCNAME       = $(shell env PYTHONPATH=$(SPHINXDIR) python3 -c 'import conf; print(conf.docname)')
-GITHUB_USERNAME = $(shell env PYTHONPATH=$(SPHINXDIR) python3 -c 'import conf; print(conf.github_username)')
-GITHUB_REPONAME = $(shell env PYTHONPATH=$(SPHINXDIR) python3 -c 'import conf; print(conf.github_reponame)')
-GITHUB_BRANCH = $(shell env PYTHONPATH=$(SPHINXDIR) python3 -c 'import conf; print(conf.github_branch)')
-COLAB_DIR     = $(shell env PYTHONPATH=$(SPHINXDIR) python3 -c 'import conf; print(conf.colab_dir)')
+TOCNAME       = $(shell env PYTHONPATH=$(SPHINXDIR) $(PYTHONCMD) -c 'import conf; print(conf.master_doc)')
+PROJECT       = $(shell env PYTHONPATH=$(SPHINXDIR) $(PYTHONCMD) -c 'import conf; print(conf.project)')
+DOCNAME       = $(shell env PYTHONPATH=$(SPHINXDIR) $(PYTHONCMD) -c 'import conf; print(conf.docname)')
+GITHUB_USERNAME = $(shell env PYTHONPATH=$(SPHINXDIR) $(PYTHONCMD) -c 'import conf; print(conf.github_username)')
+GITHUB_REPONAME = $(shell env PYTHONPATH=$(SPHINXDIR) $(PYTHONCMD) -c 'import conf; print(conf.github_reponame)')
+GITHUB_BRANCH = $(shell env PYTHONPATH=$(SPHINXDIR) $(PYTHONCMD) -c 'import conf; print(conf.github_branch)')
+COLAB_DIR     = $(shell env PYTHONPATH=$(SPHINXDIR) $(PYTHONCMD) -c 'import conf; print(conf.colab_dir)')
 INDEX_NAME    = index_of_terms
 
 all:
