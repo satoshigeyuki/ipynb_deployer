@@ -88,6 +88,7 @@ html_theme_options = {
 html_sidebars = {
     '**': [
         'about.html',
+        'view_on_github.html',
         'open_in_colab.html',
         'navigation.html',
         'relations.html',
@@ -100,7 +101,10 @@ html_search_language = 'ja'
 
 html_show_sourcelink = False
 
-html_context = {'colab_base_url': f'https://colab.research.google.com/github/{github_username}/{github_reponame}/blob/{github_branch}/{colab_dir}'}
+html_context = {
+    'colab_base_url': f'https://colab.research.google.com/github/{github_username}/{github_reponame}/blob/{github_branch}/{colab_dir}',
+    'github_url': f'https://github.com/{github_username}/{github_reponame}',
+}
 
 # -- Options for LaTeX output ------------------------------------------------
 
