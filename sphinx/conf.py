@@ -127,6 +127,7 @@ latex_elements = {
     'extraclassoptions': ',openany,oneside',
     'classoptions': ',dvipdfmx',
     'babel': r'\usepackage[japanese]{babel}',
+    'preamble': r'\usepackage{pxjahyper}',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
