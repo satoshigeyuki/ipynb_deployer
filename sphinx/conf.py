@@ -89,6 +89,7 @@ html_sidebars = {
     '**': [
         'about.html',
         'view_on_github.html',
+        'view_pdf.html',
         'open_in_colab.html',
         'navigation.html',
         'relations.html',
@@ -104,6 +105,7 @@ html_show_sourcelink = False
 html_context = {
     'colab_base_url': f'https://colab.research.google.com/github/{github_username}/{github_reponame}/blob/{github_branch}/{colab_dir}',
     'github_url': f'https://github.com/{github_username}/{github_reponame}',
+    'pdf_url': f'https://{github_reponame}/{docname}.pdf',
 }
 
 # -- Options for LaTeX output ------------------------------------------------
