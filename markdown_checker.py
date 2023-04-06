@@ -63,7 +63,7 @@ def check_spacing_around_code(md_text, notebook):
                 print('[ILL-STYLED] ``` appears not at BOL.', notebook, line, sep=' | ', end='')
             continue
 
-        starter = [' ', '　', '。', '、', '）', ')', '（', '(', '・',  '：', '「', '#']
+        starter = [' ', '　', '。', '、', '）', ')', '（', '(', '・',  '：', '「', '#', '[']
         closer = [' ', '\n', '。', '、', '（', '）', ')', ',', '・', '」', ']']
         terms = set()
         with contextlib.suppress(StopIteration):
